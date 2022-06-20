@@ -21,10 +21,10 @@ struct ContentView: View {
                     viewModel.checkIfLocationServicesIsEnabled()
                 }
             
-            Text("Total Crimes: 12345")
+            Text("Total Crimes: \(String(self.viewModel.crimes.count))")
             
             Button {
-                print("GO")
+                self.viewModel.searchForCrimes()
             } label: {
                 Text("Get Crime Stats")
             }
