@@ -5,16 +5,33 @@
 //  Created by Stephen Clark on 20/06/2022.
 //
 
+import MapKit
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject private var viewModel = ContentViewModel()
+        
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
+                .ignoresSafeArea()
+                .accentColor(Color(.systemPink))
+                .onAppear {
+                    viewModel.checkIfLocationServicesIsEnabled()
+                }
+            
+            Text("Total Crimes: 12345")
+            
+            Button {
+                print("GO")
+            } label: {
+                Text("Get Crime Stats")
+            }
+            
+
         }
+
     }
 }
 
