@@ -59,14 +59,14 @@
 		86ABBEFF2861085600A2E36E /* MapApp */ = {
 			isa = PBXGroup;
 			children = (
-				86ABBF152861155700A2E36E /* DataService */,
-				86ABBF122861151700A2E36E /* Model */,
 				86ABBF10286114B800A2E36E /* Constants.swift */,
 				86ABBF002861085600A2E36E /* MapAppApp.swift */,
-				86ABBF022861085600A2E36E /* ContentView.swift */,
+				86ABBF1828611DF500A2E36E /* View */,
+				86ABBF1928611E2B00A2E36E /* ViewModel */,
+				86ABBF152861155700A2E36E /* DataService */,
+				86ABBF122861151700A2E36E /* Model */,
 				86ABBF042861085800A2E36E /* Assets.xcassets */,
 				86ABBF062861085800A2E36E /* Preview Content */,
-				86ABBF0E2861121800A2E36E /* ContentViewModel.swift */,
 			);
 			path = MapApp;
 			sourceTree = "<group>";
@@ -93,6 +93,22 @@
 				86ABBF162861156B00A2E36E /* CrimesDataService.swift */,
 			);
 			path = DataService;
+			sourceTree = "<group>";
+		};
+		86ABBF1828611DF500A2E36E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				86ABBF022861085600A2E36E /* ContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		86ABBF1928611E2B00A2E36E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				86ABBF0E2861121800A2E36E /* ContentViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

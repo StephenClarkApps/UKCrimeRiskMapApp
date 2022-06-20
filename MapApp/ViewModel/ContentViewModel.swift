@@ -10,17 +10,27 @@ import Combine
 
 enum MapDetails {
     static let startingLocation = CLLocationCoordinate2D(latitude: 37.331516, longitude: -121.891054)
-    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+    static let metersForRegion = 1609.34
 }
 
 
 final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
+    // CRIMES PARAMATERS
+    var cancellable: AnyCancellable?
+    
+    @Published var crimes: Crimes = Crimes()
+    @Published var requestSucceded: Bool = false
+    
+    // Alert parameters
+    @Published var showAlert: Bool = false
+
+    // LOCATION PARAMETERS
     var locationManager: CLLocationManager?
     
     @Published var region = MKCoordinateRegion(center: MapDetails.startingLocation,
-                                               span: MapDetails.defaultSpan)
-    
+                                               latitudinalMeters: MapDetails.metersForRegion,
+                                               longitudinalMeters: MapDetails.metersForRegion)
     
     func checkIfLocationServicesIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {
@@ -47,7 +57,8 @@ final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDeleg
             
             let center = locationManager.location?.coordinate ?? CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
             region = MKCoordinateRegion(center: center,
-                                        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+                                        latitudinalMeters: MapDetails.metersForRegion,
+                                        longitudinalMeters: MapDetails.metersForRegion)
             
             
         @unknown default:
@@ -56,14 +67,6 @@ final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDeleg
     }
     
     // MARK: - CRIMES STUFF
-    var cancellable: AnyCancellable?
-    
-    @Published var crimes: Crimes = Crimes()
-    @Published var requestSucceded: Bool = false
-    
-    // Alert parameters
-    @Published var showAlert: Bool = false
-
     
     public func setCrimes(crimes: Crimes) {
         self.crimes = crimes
@@ -100,6 +103,7 @@ final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDeleg
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         region = MKCoordinateRegion(center: locations[0].coordinate,
-                                    span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+                                    latitudinalMeters: MapDetails.metersForRegion,
+                                    longitudinalMeters: MapDetails.metersForRegion)
     }
 }
