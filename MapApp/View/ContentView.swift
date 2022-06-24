@@ -21,24 +21,59 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 
-                Text("Shows crime statistics for crimes withing one mile of you.").font(.subheadline).padding()
-                Text("Whilst (potentially) useful in England, please note these stats are not representative in *Scotland* as only figures from the British Transport Police will be shown.").font(.footnote).padding()
+                HStack{
+                    Text("Shows crime statistics for crimes withing one mile of you.").font(.body).padding()
+                    Spacer()
+                }
+                
+                HStack {
+                    Text("Whilst (potentially) useful in England, please note these stats are not representative in *Scotland* as only figures from the British Transport Police will be shown.").font(.subheadline).italic().padding()
+                    Spacer()
+                }
                 
                 if (self.viewModel.crimes.count > 0) {
                     HStack {
-                        Text("Total Crimes: \(String(self.viewModel.crimes.count))").bold()
-                    }.padding(.top, 10)
-                    Text("*These are for the most recent month on record").font(Font(UIFont.systemFont(ofSize: 10))).padding(0)
-                    Text("RISK LEVEL: \(self.riskStatus)").font(.system(.subheadline, weight: .light)).foregroundColor(borderColor).padding(.top, 15)
-                }
-                Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
-                    .ignoresSafeArea()
-                    .accentColor(Color(.systemPink))
-                    .onAppear {
-                        viewModel.checkIfLocationServicesIsEnabled()
+                        //                        Text("Total Crimes: \(String(self.viewModel.crimes.count))").bold()
+                        //                    }.padding(.top, 10)
+                        //                    Text("*These are for the most recent month on record").font(Font(UIFont.systemFont(ofSize: 10))).padding(0)
+                        Text("RISK LEVEL: \(self.riskStatus)").font(.system(.subheadline, weight: .semibold)).foregroundColor(borderColor).padding(.top, 15).padding(.bottom, 0)
                     }
-                    .border(borderColor, width: 5.0)
-                    .padding()
+                }
+                ZStack {
+                    Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
+                        .ignoresSafeArea()
+                        .accentColor(Color(.systemPink))
+                        .onAppear {
+                            viewModel.checkIfLocationServicesIsEnabled()
+                        }
+                        .border(borderColor, width: 5.0)
+                        .padding(.top, 0)
+                        .padding(.bottom, 10)
+                        .padding(.leading, 10)
+                        .padding(.trailing, 10)
+                    
+                    
+                    if (self.viewModel.crimes.count > 0) {
+                        
+                        VStack {
+                            Spacer().frame(height: 15)
+                            Text("Total Crimes: \(String(self.viewModel.crimes.count))").foregroundColor(.white)
+                                .shadow(radius: 3.0)
+                                .bold()
+                                .background(Color.black.opacity(0.5))
+                            Spacer().frame(height: 3)
+                            Text("*These are for the most recent month on record").font(Font(UIFont.systemFont(ofSize: 10)))
+                                .foregroundColor(.white)
+                                .shadow(radius: 3.0)
+                                .padding(0)
+                                .background(Color.black.opacity(0.5))
+                            Spacer()
+                        }
+                        .padding(.top, 10)
+                        
+ 
+                    }
+                }
                 
                 if (self.viewModel.crimes.count > 0) {
                     VStack {
