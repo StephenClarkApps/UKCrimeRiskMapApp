@@ -10,10 +10,9 @@ import SwiftUI
 
 struct ContentView: View {
     
+    // MARK: - PROPERTIES
     @StateObject private var viewModel = ContentViewModel()
-    
     @State private var borderColor = Color.clear
-    
     @State private var riskStatus = "UNKNOWN"
         
     var body: some View {
@@ -33,9 +32,6 @@ struct ContentView: View {
                 
                 if (self.viewModel.crimes.count > 0) {
                     HStack {
-                        //                        Text("Total Crimes: \(String(self.viewModel.crimes.count))").bold()
-                        //                    }.padding(.top, 10)
-                        //                    Text("*These are for the most recent month on record").font(Font(UIFont.systemFont(ofSize: 10))).padding(0)
                         Text("RISK LEVEL: \(self.riskStatus)").font(.system(.subheadline, weight: .semibold)).foregroundColor(borderColor).padding(.top, 15).padding(.bottom, 0)
                     }
                 }
@@ -126,6 +122,9 @@ struct ContentView: View {
         }
     }
 }
+
+
+// MARK: - PREVIEW
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
