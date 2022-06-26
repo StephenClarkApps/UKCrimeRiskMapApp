@@ -32,6 +32,7 @@ struct Crime: Codable, Hashable {
     }
 }
 
+// MARK: - CrimeCategory
 enum CrimeCategory: String, Codable, Hashable {
     case antiSocialBehaviour = "anti-social-behaviour"
     case bicycleTheft = "bicycle-theft"
@@ -62,11 +63,7 @@ struct Street: Codable, Hashable {
     let name: String
 }
 
-//enum LocationSubtype: String, Codable, Hashable {
-//    case empty = ""
-//    case station = "STATION"
-//}
-
+// MARK: - LocationType
 enum LocationType: String, Codable, Hashable {
     case btp = "BTP"
     case force = "Force"
@@ -79,6 +76,7 @@ struct OutcomeStatus: Codable, Hashable {
     let date: String
 }
 
+// MARK: - OutcomeStatusCategory
 enum OutcomeStatusCategory: String, Codable, Hashable {
     case awaitingCourtOutcome = "Awaiting court outcome"
     case courtResultUnavilable = "Court result unavailable"
