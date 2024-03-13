@@ -13,20 +13,36 @@ import CoreLocation
 
 final class CrimesDataService: CrimesFetchingService {
     
-    private var lat: Double = 53.4084
-    private var long: Double = -2.9916
-    
+//    func fetchCrimesForLocation(lat: Double, long: Double) -> AnyPublisher<Crimes, Error> {
+//        
+//        var comps = URLComponents()
+//        comps.scheme = Constants.API.defaultScheme
+//        comps.host = Constants.API.defaultHost
+//        comps.path = Constants.API.defaultPath
+//        comps.queryItems = [URLQueryItem(name: "lat", value: String(lat)),
+//                                 URLQueryItem(name: "lng", value: String(long))]
+//        
+//
+//        
+//        return URLSession.shared.dataTaskPublisher(for: comps.url!)
+//            .subscribe(on: DispatchQueue.global(qos: .background))
+//            .receive(on: DispatchQueue.main)
+//            .map { $0.data }
+//            .decode(type: Crimes.self, decoder: JSONDecoder())
+//            .eraseToAnyPublisher()
+//    }
     
     func fetchCrimesForLocation(lat: Double, long: Double) -> AnyPublisher<Crimes, Error> {
+        // Constructing URL string manually
+        let urlString = "\(Constants.API.defaultScheme)://\(Constants.API.defaultHost)\(Constants.API.defaultPath)?lat=\(lat)&lng=\(long)"
         
-        var components = URLComponents()
-        components.scheme = Constants.API.defaultScheme
-        components.host = Constants.API.defaultHost
-        components.path = Constants.API.defaultPath
-        components.queryItems = [URLQueryItem(name: "lat", value: String(lat)),
-                                 URLQueryItem(name: "lng", value: String(long))]
-        
-        return URLSession.shared.dataTaskPublisher(for: components.url!)
+        guard let url = URL(string: urlString) else {
+            // Handle invalid URL
+            let error = URLError(.badURL)
+            return Fail(error: error).eraseToAnyPublisher()
+        }
+
+        return URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
             .map { $0.data }
