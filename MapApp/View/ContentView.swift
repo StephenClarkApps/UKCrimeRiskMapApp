@@ -8,6 +8,7 @@
 import MapKit
 import SwiftUI
 
+@MainActor
 struct ContentView: View {
     
     // MARK: - PROPERTIES

@@ -6,6 +6,7 @@
 //
 
 import MapKit
+import SwiftUI
 import Combine
 
 enum MapDetails {
@@ -17,7 +18,7 @@ enum MapDetails {
 final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     // CRIMES PARAMATERS
-    var cancellable: AnyCancellable?
+    @Published var cancellable: AnyCancellable?
     
     @Published var crimes: Crimes = Crimes()
     @Published var requestSucceded: Bool = false
