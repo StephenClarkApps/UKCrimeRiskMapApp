@@ -79,13 +79,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		867CA38A2868A9B0009ECAFA /* Modifiers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Modifiers;
-			sourceTree = "<group>";
-		};
 		867CA3902868A9D2009ECAFA /* MapAppTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,7 +122,6 @@
 				86ABBF10286114B800A2E36E /* Constants.swift */,
 				86ABBF002861085600A2E36E /* MapAppApp.swift */,
 				86ABBF1828611DF500A2E36E /* View */,
-				867CA38A2868A9B0009ECAFA /* Modifiers */,
 				86ABBF1928611E2B00A2E36E /* ViewModel */,
 				86ABBF152861155700A2E36E /* DataService */,
 				86ABBF122861151700A2E36E /* Model */,

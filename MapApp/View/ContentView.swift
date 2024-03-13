@@ -12,7 +12,7 @@ import SwiftUI
 struct ContentView: View {
     
     // MARK: - PROPERTIES
-    @StateObject private var viewModel = ContentViewModel()
+    @ObservedObject private var viewModel = ContentViewModel() // the view observes changes in the VM
     @State private var borderColor = Color.clear
     @State private var riskStatus = "UNKNOWN"
         
